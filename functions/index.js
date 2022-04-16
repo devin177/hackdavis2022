@@ -26,25 +26,26 @@ async function run() {
 }
 run().catch(console.dir);
 
-app.post('/', (req, res) => {
+app.get('/', (req, res) => {
   res.send("Base page");
 })
 
 // Generate a QR code based on the verify url
 app.post('/generate', (req, res) => {
   // create verification url
-  url = `https://us-central1-aggierewards-ea14c.cloudfunctions.net/app/verify/${req.body.username}`
+  url = `https://us-central1-aggierewards-ea14c.cloudfunctions.net/app/verify?username=${req.body.username}`
   console.log(url)
   QRCode.toDataURL(url, (err, qr) => {
-    res.send(url);
+    res.send(qr);
   })
 })
 
 // [Verify] and update points
 // Todo: the actual verifation/auth process for validity of qr code
-app.post('verify', (req, res) => {
+app.post('/verify', (req, res) => {
   // Send a update request to the db
-
+  console.log(req.query.username);
+  res.send("received");
 })
 
 app.listen(port, () => {
