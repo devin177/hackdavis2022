@@ -20,6 +20,7 @@ app.post('/generate', (req, res) => {
 // Todo: the actual verifation/auth process for validity of qr code
 app.post('verify', (req, res) => {
   // Send a update request to the db
+  
 })
 
 app.listen(port, () => {
