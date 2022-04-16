@@ -6,11 +6,20 @@ const bp = require('body-parser')
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 
+// Generate a QR code based on the verify url
 app.post('/generate', (req, res) => {
-  QRCode.toDataURL(req.body.message, (err, qr) => {
-    console.log(qr);
-    res.send(qr);
+  // create verification url
+  url = `localhost:3000/verify/${req.body.username}`
+  console.log(url)
+  QRCode.toDataURL(url, (err, qr) => {
+    res.send(url);
   })
+})
+
+// [Verify] and update points
+// Todo: the actual verifation/auth process for validity of qr code
+app.post('verify', (req, res) => {
+  // Send a update request to the db
 })
 
 app.listen(port, () => {
