@@ -17,11 +17,17 @@ async function run() {
     // Connect the client to the server
     await client.connect();
     // Establish and verify connection
-    await client.db("admin").command({ ping: 1 });
+    await client.db("aggierewards").command({ ping: 1 });
     console.log("Connected successfully to server");
+    
+    const collection = client.db("AggieSpirit").collection("users");
+    collection.insertOne({
+      userName: "devynboi",
+      points: 0
+    });
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
 run().catch(console.dir);
