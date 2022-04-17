@@ -1,11 +1,12 @@
 const functions = require("firebase-functions");
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 5000
 const QRCode = require('qrcode')
 const bp = require('body-parser')
 const { MongoClient } = require("mongodb");
 const { user } = require("firebase-functions/v1/auth");
+const cors = require('cors');
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 
@@ -72,6 +73,8 @@ async function purchaseReward(username, cost) {
     await client.close();
   }
 }
+
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.send("Base page");
