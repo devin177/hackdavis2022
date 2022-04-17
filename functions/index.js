@@ -5,6 +5,7 @@ const port = 3000
 const QRCode = require('qrcode')
 const bp = require('body-parser')
 const { MongoClient } = require("mongodb");
+const { user } = require("firebase-functions/v1/auth");
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 
@@ -12,26 +13,42 @@ app.use(bp.json());
 const uri = "mongodb+srv://admin:rQbMxlDmogFNavik@aggierewards.5psgr.mongodb.net/aggieSpirit?retryWrites=true&w=majority";
 // Create a new MongoClient
 const client = new MongoClient(uri);
-async function run() {
+const collection = client.db("AggieSpirit").collection("users");
+
+async function addOneReward(username) {
   try {
     // Connect the client to the server
     await client.connect();
-    // Establish and verify connection
-    await client.db("aggierewards").command({ ping: 1 });
-    console.log("Connected successfully to server");
 
-    // const collection = client.db("AggieSpirit").collection("users");
-    // collection.updateOne({userName: "devynboi"}, {$set: {
-    //   userName: "devynboi",
-    //   points: 4
-    // }},
-    // {upsert: true});
+    // Finds user in db, if they don't exist, add them
+    // Increments points by 1 in database
+    await collection.updateOne(
+      {userName: username}, 
+      {$inc: {points: 1}},
+      {upsert: true}
+    );
   } finally {
     // Ensures that the client will close when you finish/error
-    // await client.close();
+    await client.close();
   }
 }
-//run().catch(console.dir);
+
+async function getUserPoints(username) {
+  try {
+    // Connect the client to the server
+    await client.connect();
+
+    let userPoints = await collection.findOne(
+      {userName: username}, 
+      {projection: {_id: 0, userName: 0}}
+    );
+    // TODO: return this so get /points can disply with res.send
+    console.log(Object.values(userPoints));
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
 
 app.get('/', (req, res) => {
   res.send("Base page");
@@ -57,12 +74,7 @@ app.get('/verify', (req, res) => {
   // req.query.username is the username from the link
   // TODO: add one point to the user
   // and do checking
-  const collection = client.db("AggieSpirit").collection("users");
-  collection.updateOne({userName: req.query.username}, {$set: {
-    userName: req.query.username,
-    points: 5
-  }},
-  {upsert: true});
+  addOneReward(req.query.username).catch(console.dir);
 
   // Notify user of point
   console.log(`${req.query.username} has earned 1 point`);
@@ -73,6 +85,8 @@ app.get('/verify', (req, res) => {
 app.get('/points', (req, res) => {
   // Todo: access the data
   // As part of the GET request, add ?username=user to the end of the URL
+  getUserPoints(req.query.username).catch(console.dir);
+
   res.send("To do: implement points route")
 })
 
