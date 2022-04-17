@@ -19,12 +19,13 @@ async function run() {
     // Establish and verify connection
     await client.db("aggierewards").command({ ping: 1 });
     console.log("Connected successfully to server");
-    
-    const collection = client.db("AggieSpirit").collection("users");
-    collection.insertOne({
-      userName: "devynboi",
-      points: 0
-    });
+
+    // const collection = client.db("AggieSpirit").collection("users");
+    // collection.updateOne({userName: "devynboi"}, {$set: {
+    //   userName: "devynboi",
+    //   points: 4
+    // }},
+    // {upsert: true});
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
@@ -56,6 +57,12 @@ app.get('/verify', (req, res) => {
   // req.query.username is the username from the link
   // TODO: add one point to the user
   // and do checking
+  const collection = client.db("AggieSpirit").collection("users");
+  collection.updateOne({userName: req.query.username}, {$set: {
+    userName: req.query.username,
+    points: 5
+  }},
+  {upsert: true});
 
   // Notify user of point
   console.log(`${req.query.username} has earned 1 point`);
