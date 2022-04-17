@@ -8,9 +8,10 @@ import IconButton from '@mui/material/IconButton';
 
 export default function TitlebarImageList() {
   return (
-    <ImageList sx={{ width: 500, height: 450 }}>
+
+    <ImageList sx={{ width: 500, height: 450,}}>
       <ImageListItem key="Subheader" cols={2}>
-        <ListSubheader component="div">Aggie Rewards</ListSubheader>
+        <ListSubheader component="div"></ListSubheader>
       </ImageListItem>
       {itemData.map((item) => (
         <ImageListItem key={item.img}>

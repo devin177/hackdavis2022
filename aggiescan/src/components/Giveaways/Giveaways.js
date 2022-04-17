@@ -9,12 +9,12 @@ export default function GiveawayCards() {
   return (
     <div>
       <Card sx={{ maxWidth: 325 }}>
-        <CardActionArea>
+        <CardActionArea href="https://www.instagram.com/p/CNNXSKmMLu-/" target="_blank">
           <CardMedia
             component="img"
             height="400"
             image="https://ucdavisstores.com/storeimages/192-1657569-1.jpg"
-            alt="aggie navy shirt"
+            alt="aggie navy tshirt"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
@@ -50,16 +50,16 @@ export default function GiveawayCards() {
         <CardActionArea>
           <CardMedia
             component="img"
-            height="400"
-            image="https://ucdavisstores.com/storeimages/192-1657569-1.jpg"
-            alt="aggie navy shirt"
+            height="200"
+            image="https://i.imgur.com/SpnznYI.png"
+            alt="expired"
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              UC Davis Athletics - Navy
+              Aggies Bucket Hat
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Giveaway Ends - 4/21/2022
+              Giveaway Ended
             </Typography>
           </CardContent>
         </CardActionArea>

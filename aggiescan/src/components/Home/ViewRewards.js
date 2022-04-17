@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 
 export default function ContainedButtons() {
   return (
-    <Stack spacing={2} direction="row">
+    <Stack spacing={2} direction="row" margin="3em">
     <Button variant="contained" size="large"> View Rewards</Button>
     </Stack>
   );
