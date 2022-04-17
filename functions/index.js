@@ -75,6 +75,7 @@ async function purchaseReward(username, cost) {
 }
 
 app.use(cors());
+app.options('*', cors());
 
 app.get('/', (req, res) => {
   res.send("Base page");
