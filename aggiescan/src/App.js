@@ -3,8 +3,6 @@ import './App.css';
 import * as React from 'react';
 import HomePage from './pages/home'
 
-
-
 function App() {
   return (
     <div className="App">

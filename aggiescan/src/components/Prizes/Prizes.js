@@ -42,15 +42,15 @@ const itemData = [
   {
     img: 'https://ucdavisstores.com/storeimages/192-1657569-1.jpg',
     title: 'MV Sport UC Davis Navy Athletics T-Shirt',
-    subtitle: '@bkristastucchio',
+    subtitle: 'In Stock',
     rows: 2,
     cols: 2,
     featured: true,
   },
   {
-    img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-    title: 'Coffee',
-    subtitle: '@nolanissac',
+    img: 'https://ucdavisstores.com/storeimages/192-1713177-1.jpg',
+    title: 'MV Sport UC Davis 1/4 Zip Champion Aggies Sweatshirt Navy',
+    subtitle: 'In Stock',
     cols: 2,
   },
   {
