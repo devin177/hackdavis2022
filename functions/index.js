@@ -7,6 +7,11 @@ const bp = require('body-parser')
 const { MongoClient } = require("mongodb");
 const { user } = require("firebase-functions/v1/auth");
 const cors = require('cors');
+// Automatically allow cross-origin requests
+app.use(cors({ origin: true }));
+
+// Add middleware to authenticate requests
+app.use(myMiddleware);
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 
@@ -73,9 +78,6 @@ async function purchaseReward(username, cost) {
     await client.close();
   }
 }
-
-app.use(cors());
-app.options('*', cors());
 
 app.get('/', (req, res) => {
   res.send("Base page");
