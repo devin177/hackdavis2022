@@ -30,17 +30,19 @@ async function run() {
     // await client.close();
   }
 }
-run().catch(console.dir);
+//run().catch(console.dir);
 
 app.get('/', (req, res) => {
   res.send("Base page");
 })
 
+// Client TODO: When you open the QR tab as a user, send a POST request
+// to this route. As part of the body of the request, send {username: user}
 // Generate a QR code based on the verify url
 app.post('/generate', (req, res) => {
   // create verification url
   url = `https://us-central1-aggierewards-ea14c.cloudfunctions.net/app/verify?username=${req.body.username}`
-  console.log(url)
+  //temp = `localhost:3000/${req.body.username}`
   QRCode.toDataURL(url, (err, qr) => {
     res.send(qr);
   })
@@ -48,10 +50,23 @@ app.post('/generate', (req, res) => {
 
 // [Verify] and update points
 // Todo: the actual verifation/auth process for validity of qr code
-app.post('/verify', (req, res) => {
+app.get('/verify', (req, res) => {
   // Send a update request to the db
-  console.log(req.query.username);
-  res.send("received");
+  // and do the update
+  // req.query.username is the username from the link
+  // TODO: add one point to the user
+  // and do checking
+
+  // Notify user of point
+  console.log(`${req.query.username} has earned 1 point`);
+  res.send(`${req.query.username} has earned 1 point`);
+})
+
+// Go look at the database
+app.get('/points', (req, res) => {
+  // Todo: access the data
+  // As part of the GET request, add ?username=user to the end of the URL
+  res.send("To do: implement points route")
 })
 
 app.listen(port, () => {
