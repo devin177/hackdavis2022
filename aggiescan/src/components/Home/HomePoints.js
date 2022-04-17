@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 const HomePoints = () =>{
     const [numPoints, setNumPoints] = useState(0);
     // use effect
+
     return(
         
         <div className = "pointContainer">
