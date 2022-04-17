@@ -8,6 +8,7 @@ import TitlebarImageList from '../components/Prizes/Prizes';
 const HomePage = () =>{
     return(
              <div class="homeContainer">
+                 <h1> AggieRewards </h1>
                 <HomePoints />
                 <ContainedButtons />
                 <TitlebarImageList />
