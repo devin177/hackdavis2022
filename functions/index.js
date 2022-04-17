@@ -10,8 +10,6 @@ const cors = require('cors');
 // Automatically allow cross-origin requests
 app.use(cors({ origin: true }));
 
-// Add middleware to authenticate requests
-app.use(myMiddleware);
 app.use(bp.urlencoded({ extended: false }));
 app.use(bp.json());
 
