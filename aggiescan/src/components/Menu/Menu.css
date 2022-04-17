@@ -1,0 +1,26 @@
+
+.menuContainer{
+    display: flex;
+    flex-direction: row;
+    background-color:blue;
+    position:absolute;
+    bottom:30px;
+    padding: 1em 5em 1em 5em;
+    justify-content: space-around;
+    gap: 20px;
+    justify-content: space-evenly;
+    border-radius: 12px;
+
+  }
+  
+.buttonContainer{
+
+}
+
+  .menuButton{
+    background-color: white;
+    padding: 3em;
+    border: none;
+    border-radius: 10px;
+  }
+  

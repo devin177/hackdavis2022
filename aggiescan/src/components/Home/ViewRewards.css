@@ -1,0 +1,11 @@
+.ViewButton{
+    padding: 2em;
+    background-color: blue;
+    border-radius: 12px;
+    margin: 3em;
+}
+
+.ViewButton p{
+    color: white;
+    font-weight: 700;
+}

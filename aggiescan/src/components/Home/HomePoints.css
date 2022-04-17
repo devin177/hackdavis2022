@@ -1,0 +1,25 @@
+
+
+  
+  .pointContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3em 0 3em 0em;
+    min-width: 400px;
+  }
+
+
+
+.progressCircle{
+    width: 10em;
+    height: 10em;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 10px blue;
+    padding: 3em;
+    border-radius: 50%;
+}
