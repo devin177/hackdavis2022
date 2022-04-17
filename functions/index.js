@@ -54,6 +54,25 @@ async function getUserPoints(username) {
   }
 }
 
+// Decrease points of a user based on cost of redeemed item
+async function purchaseReward(username, cost) {
+  try {
+    // Connect the client to the server
+    await client.connect();
+
+    // Finds user in db, if they don't exist, DON'T add them
+    // Decrement points by cost in database
+    await collection.updateOne(
+      {userName: username}, 
+      {$inc: {points: -cost}},
+      {upsert: false}
+    );
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+
 app.get('/', (req, res) => {
   res.send("Base page");
 })
@@ -94,6 +113,21 @@ app.get('/points', (req, res) => {
       res.send(pointsRes);
     })
     .catch(console.dir);
+})
+
+// Go look at the database
+app.post('/redeem', (req, res) => {
+  console.log("Redeem request received");
+  
+  let userPoints = getUserPoints(req.query.username);
+
+  if (userPoints >= req.query.cost) {
+    purchaseReward(req.query.username, req.query.cost).catch(console.dir);
+  }
+  else {
+    console.log("Not enough reward points!");
+    res.send("Not enough reward points!");
+  }
 })
 
 app.listen(port, () => {
