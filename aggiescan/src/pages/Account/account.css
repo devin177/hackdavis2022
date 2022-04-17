@@ -1,0 +1,10 @@
+.accountContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3em 0em 0em 0em;
+}
+h1{
+    font-size: xx-large;
+}
