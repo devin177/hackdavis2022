@@ -14,7 +14,9 @@ const uri = "mongodb+srv://admin:rQbMxlDmogFNavik@aggierewards.5psgr.mongodb.net
 // Create a new MongoClient
 const client = new MongoClient(uri);
 const collection = client.db("AggieSpirit").collection("users");
+const rewards = client.db("AggieSpirit").collection("rewards");
 
+// Increment points of a user
 async function addOneReward(username) {
   try {
     // Connect the client to the server
@@ -33,21 +35,37 @@ async function addOneReward(username) {
   }
 }
 
+// in between function for points api
 async function getUserPoints(username) {
   try {
     // Connect the client to the server
     await client.connect();
 
+    // look for the specified user
     let userPoints = await collection.findOne(
       {userName: username}, 
       {projection: {_id: 0, userName: 0}}
     );
-    // TODO: return this so get /points can disply with res.send
-    console.log(Object.values(userPoints));
+
+    return(Object.values(userPoints));
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
   }
+}
+
+async function getAllRewards() {
+  // try {
+  //   // Connect the client to the server
+  //   await client.connect();
+
+  //   let userPoints = await rewards.
+  //   // TODO: return this so get /points can disply with res.send
+  //   return(Object.values(userPoints));
+  // } finally {
+  //   // Ensures that the client will close when you finish/error
+  //   await client.close();
+  // }
 }
 
 app.get('/', (req, res) => {
@@ -58,6 +76,7 @@ app.get('/', (req, res) => {
 // to this route. As part of the body of the request, send {username: user}
 // Generate a QR code based on the verify url
 app.post('/generate', (req, res) => {
+  console.log("Generate request received");
   // create verification url
   url = `https://us-central1-aggierewards-ea14c.cloudfunctions.net/app/verify?username=${req.body.username}`
   //temp = `localhost:3000/${req.body.username}`
@@ -69,11 +88,9 @@ app.post('/generate', (req, res) => {
 // [Verify] and update points
 // Todo: the actual verifation/auth process for validity of qr code
 app.get('/verify', (req, res) => {
+  console.log("Verify request received");
   // Send a update request to the db
   // and do the update
-  // req.query.username is the username from the link
-  // TODO: add one point to the user
-  // and do checking
   addOneReward(req.query.username).catch(console.dir);
 
   // Notify user of point
@@ -83,11 +100,19 @@ app.get('/verify', (req, res) => {
 
 // Go look at the database
 app.get('/points', (req, res) => {
-  // Todo: access the data
-  // As part of the GET request, add ?username=user to the end of the URL
-  getUserPoints(req.query.username).catch(console.dir);
+  console.log("Points request received");
+  // Call async lookup function
+  getUserPoints(req.query.username)
+    .then((pointsRes) => {
+      console.log(pointsRes);
+      res.send(pointsRes);
+    })
+    .catch(console.dir);
+})
 
-  res.send("To do: implement points route")
+// Get a list of all prizes available
+app.get('/rewards', (req, res) => {
+
 })
 
 app.listen(port, () => {
