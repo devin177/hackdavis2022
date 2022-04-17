@@ -54,20 +54,6 @@ async function getUserPoints(username) {
   }
 }
 
-async function getAllRewards() {
-  // try {
-  //   // Connect the client to the server
-  //   await client.connect();
-
-  //   let userPoints = await rewards.
-  //   // TODO: return this so get /points can disply with res.send
-  //   return(Object.values(userPoints));
-  // } finally {
-  //   // Ensures that the client will close when you finish/error
-  //   await client.close();
-  // }
-}
-
 app.get('/', (req, res) => {
   res.send("Base page");
 })
@@ -108,11 +94,6 @@ app.get('/points', (req, res) => {
       res.send(pointsRes);
     })
     .catch(console.dir);
-})
-
-// Get a list of all prizes available
-app.get('/rewards', (req, res) => {
-
 })
 
 app.listen(port, () => {
