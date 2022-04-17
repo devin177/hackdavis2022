@@ -1,44 +1,10 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import SpeedDial from '@mui/material/SpeedDial';
-import SpeedDialIcon from '@mui/material/SpeedDialIcon';
-import SpeedDialAction from '@mui/material/SpeedDialAction';
-import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
-import SaveIcon from '@mui/icons-material/Save';
-import PrintIcon from '@mui/icons-material/Print';
-import ShareIcon from '@mui/icons-material/Share';
 
-const actions = [
-  { icon: <FileCopyIcon />, name: 'Copy' },
-  { icon: <SaveIcon />, name: 'Save' },
-  { icon: <PrintIcon />, name: 'Print' },
-  { icon: <ShareIcon />, name: 'Share' },
-];
-
-export default function ControlledOpenSpeedDial() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+function QRcode() {
 
   return (
-    <Box sx={{ height: 320, transform: 'translateZ(0px)', flexGrow: 1 }}>
-      <SpeedDial
-        ariaLabel="SpeedDial controlled open example"
-        sx={{ position: 'absolute', bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon />}
-        onClose={handleClose}
-        onOpen={handleOpen}
-        open={open}
-      >
-        {actions.map((action) => (
-          <SpeedDialAction
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
-            onClick={handleClose}
-          />
-        ))}
-      </SpeedDial>
-    </Box>
+    <img src="data:image/png;base64,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"/>
   );
 }
+
+export default QRcode;

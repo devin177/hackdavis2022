@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: solid 10px blue;
+    border: solid 10px #022851;
     padding: 3em;
     border-radius: 50%;
 }
